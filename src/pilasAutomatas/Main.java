@@ -24,7 +24,7 @@ public class Main extends Application {
 
         try {
 
-            scene = new Scene(loadFXML("home"));
+            scene = new Scene(loadFXML("root"));
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("INICIO");
