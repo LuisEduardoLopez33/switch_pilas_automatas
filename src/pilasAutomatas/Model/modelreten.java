@@ -2,6 +2,8 @@ package pilasAutomatas.Model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.Arrays;
 import java.util.Stack;
 
 public class modelreten {
@@ -15,9 +17,10 @@ public class modelreten {
     Stack pila = new Stack();
 
     public ObservableList recibendoDato( ObservableList datos){
-
+        System.out.println("INICIANDO CON LA LECTURA");
         array = datos;
-        if (pila.size() == 0){
+        pila.push("S");
+        if (pila.size() == 1){
             s();
         }
 
@@ -48,7 +51,10 @@ public class modelreten {
         return array;
     }
 
-
+    public void imprimirPila(){
+        System.out.println("elementos en pila");
+        System.out.println(Arrays.asList(pila));
+    }
     public void pushPila(){
         String tam = (String) pila.get(pila.size()-1);
 
@@ -64,44 +70,46 @@ public class modelreten {
     }
 
     public void s(){
+        imprimirPila();
+        pila.pop();
         for (int i = s.length-1; i >= 0; i--){
             pila.push(s[i]);
         }
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
         i();
     }
 
     public void i(){
-        System.out.println("entando al i pa :)");
+        System.out.println("modificando pila:");
         pila.pop();
         pila.push("switch");
-        String ultimoPila = (String) pila.get(pila.size()-1);
-        System.out.println("Ultimo en I "+ultimoPila);
+        imprimirPila();
+
 //        // imprimiendo array
 //        for (int i = 0; i< array.size(); i++){
 //            System.out.println(array.get(i));
 //        }
-        if (ultimoPila.equals(array.get(array.size()-1))){
+        if (pila.peek().equals(array.get(array.size()-1))){
+            System.out.println("comparando y eliminando");
+            System.out.println("****");
             pila.pop();
             array.remove(array.size()-1);
             pa();
         }
 
-        System.out.println("saliendo de i");
     }
 
     public void pa(){
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
         pila.pop();
         pila.push("(");
-        String ultimoPila = (String) pila.get(pila.size()-1);
-
-        //Imprimiendo Ultimo en la Pila y Array
-        System.out.println("Ultimo en PA "+ultimoPila+" \nUltimo en Array "+ array.get(array.size()-1));
-
-        //Imprimiendo datos de la pila
-//        for (int i = pila.size()-1; i >=0 ; i--){
-//            System.out.println(pila.get(i));
-//        }
-        if (ultimoPila.equals(array.get(array.size()-1))){
+        System.out.println("modificando pila");
+        imprimirPila();
+        if (pila.peek().equals(array.get(array.size()-1))){
+            System.out.println("comparando y eliminando");
+            System.out.println("****");
             pila.pop();
             array.remove(array.size()-1);
             v();
@@ -109,18 +117,19 @@ public class modelreten {
     }
 
     public void v(){
-        System.out.println("Entando a V ");
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
         pila.pop();
+        pila.push("RESTO");
         pila.push("CARACTER");
-
-        //Imprimiendo Ultimo en la Pila y Array
-        System.out.println("Ultimo en V "+(String) pila.get(pila.size()-1) +" \nUltimo en Array "+ array.get(array.size()-1));
-        for (int i = pila.size()-1; i >=0 ; i--){
-            System.out.println(pila.get(i));
-        }
+        System.out.println("modificando pila: ");
+        imprimirPila();
 
         boolean result = expr.validarPalabra(array.get(array.size()-1));
         if (result){
+            System.out.println("comparando y eliminando");
+            System.out.println("****");
+            pila.pop();
             pila.pop();
             array.remove(array.size()-1);
             pc();
@@ -128,16 +137,15 @@ public class modelreten {
     }
 
     public void pc(){
-        System.out.println("Entrando a PC");
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
         pila.pop();
         pila.push(")");
-        String ultimoPila = (String) pila.get(pila.size()-1);
-        System.out.println("Ultimo en PC "+(String) pila.get(pila.size()-1) +" \nUltimo en Array "+ array.get(array.size()-1));
-        for (int i = pila.size()-1; i >=0 ; i--){
-            System.out.println(pila.get(i));
-        }
-
-        if (ultimoPila.equals(array.get(array.size()-1))){
+        System.out.println("modificando pila: ");
+        imprimirPila();
+        if (pila.peek().equals(array.get(array.size()-1))){
+            System.out.println("comparando y eliminando");
+            System.out.println("****");
             pila.pop();
             array.remove(array.size()-1);
             la();
@@ -145,17 +153,18 @@ public class modelreten {
     }
 
     public void la(){
-        System.out.println("Entrando a LA");
+        String sub = array.get(array.size()-1);
+        System.out.println("evaluar: "+ sub.substring(0,1));
+        imprimirPila();
         pila.pop();
         pila.push("{");
-        System.out.println("Ultimo en LA 2 "+(String) pila.get(pila.size()-1) +" \nUltimo en Array "+ array.get(array.size()-1));
-        for (int i = pila.size()-1; i >=0 ; i--){
-            System.out.println(pila.get(i));
-        }
+        System.out.println("modificando pila: ");
+        imprimirPila();
 
         //Quitando el Enter para poder validar
-        String sub = array.get(array.size()-1);
-        if (pila.get(pila.size()-1).equals(sub.substring(0,1))){
+        if (pila.peek().equals(sub.substring(0,1))){
+            System.out.println("comparando y eliminando");
+            System.out.println("****");
             pila.pop();
             array.remove(array.size()-1);
             c();
