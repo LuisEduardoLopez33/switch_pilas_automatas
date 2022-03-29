@@ -13,7 +13,7 @@ public class rootController {
     @FXML
     TextArea entrada;
 
-
+// boton de inicio
     public void datoEntrada(){
         String dats = entrada.getText();
 

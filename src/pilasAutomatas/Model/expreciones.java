@@ -3,9 +3,16 @@ import java.util.regex.*;
 
 public class expreciones {
 
-    public boolean validarEntrada(String dato) {
+    public boolean validarPalabra(String dato) {
 
-        Pattern pat = Pattern.compile("(^(S)=(I|PA|V|PC|LA|C|LC))");
+        Pattern pat = Pattern.compile("[A-Za-z]+");
+        Matcher mat = pat.matcher(dato);
+
+        return mat.matches();
+    }
+
+    public boolean validarNumeros(String dato) {
+        Pattern pat = Pattern.compile("[0-9]+");
         Matcher mat = pat.matcher(dato);
 
         return mat.matches();
