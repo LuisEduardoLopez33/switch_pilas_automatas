@@ -23,7 +23,7 @@ public class rootController {
         for (int i = sa.length-1; i>=0; i--){
             //String m = sa[i].substring(0);
             //System.out.println(m+ " aqui mero");
-            entrad.add(sa[i].substring(0));
+            entrad.add(sa[i]);
         }
 
         //imprimiendo el array
