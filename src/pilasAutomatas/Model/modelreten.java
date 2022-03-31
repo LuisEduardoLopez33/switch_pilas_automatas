@@ -10,19 +10,21 @@ public class modelreten {
     expreciones expr = new expreciones();
     ObservableList<String> array = FXCollections.observableArrayList();
     String[] s = {"I","PA","V","PC","LA","C","LC"};
+    String[] c = {"CS","VALOR",":","PRINT",";","BRK",";"};
+    boolean aux = true;
     boolean status = true;
-    int aux = 0;
+    boolean resultado = false;
 
     Stack pila = new Stack();
 
-    public ObservableList recibendoDato( ObservableList datos){
+    public boolean recibendoDato( ObservableList datos){
         System.out.println("INICIANDO CON LA LECTURA");
         array = datos;
         pila.push("S");
         if (pila.size() == 1){
             s();
         }
-        return array;
+        return resultado;
     }
 
     public void imprimirPila(){
@@ -86,7 +88,9 @@ public class modelreten {
         if (result){
             pila.pop();
             popDatos();
-            pc();
+            if (aux) {
+                pc();
+            }
         }
     }
 
@@ -116,6 +120,9 @@ public class modelreten {
         if (pila.peek().equals(sub.substring(0,1))){
             popDatos();
             c();
+            if (pila.size() == 1){
+                lc();
+            }
         }
     }
 
@@ -123,26 +130,25 @@ public class modelreten {
         System.out.println("evaluar: "+ array.get(array.size()-1));
         imprimirPila();
         pila.pop();
-        pila.push(";");
-        pila.push("BRK");
-        pila.push(";");
-        pila.push("PRINT");
-        pila.push(":");
-        pila.push("VALOR");
-        pila.push("CS");
+        //agregando dependencias de C
+        for (int i = c.length-1; i >= 0; i--){
+            pila.push(c[i]);
+        }
         System.out.println("modificando pila:");
         imprimirPila();
+        pila.pop();
         CS();
+        valor();
+        dosPuntos();
     }
 
     public void CS(){
         System.out.println("modificando pila:");
-        pila.pop();
+        //pila.pop();
         pila.push("case");
         imprimirPila();
         if(pila.peek().equals(array.get(array.size()-1))){
             popDatos();
-            valor();
         }
     }
 
@@ -156,6 +162,7 @@ public class modelreten {
             pila.push("N");
             System.out.println("modifcando pila:");
             imprimirPila();
+            pila.pop();
             popDatos();
             // ir al metodo : (dos puntos)
         }else{
@@ -174,18 +181,109 @@ public class modelreten {
         System.out.println("evaluar: "+ array.get(array.size()-1));
         imprimirPila();
         pila.pop();
-        pila.push('"');
+        pila.push("“");
         System.out.println("modificando pila:");
         imprimirPila();
+
+
         if(pila.peek().equals(array.get(array.size()-1))){
             popDatos();
             // ir al metodo V - trata de usar una bandera para identificar de que proceso viene, puedes enviarlo como parametro
+            aux = false;
+            v();
+            comC();
+        }
+    }
+
+    public void comC(){
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
+        pila.pop();
+        pila.push("”");
+        System.out.println("modificando pila:");
+        imprimirPila();
+
+        if(pila.peek().equals(array.get(array.size()-1))){
+            popDatos();
+        }
+    }
+
+    public void dosPuntos(){
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
+        //pila.pop();
+        //pila.push(":");
+        System.out.println("modificando pila: ");
+        imprimirPila();
+
+        if (pila.peek().equals(array.get(array.size()-1))){
+            popDatos();
+            print();
+        }
+    }
+
+    public void print(){
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
+        pila.pop();
+        pila.push("System.out.println(“Hola”)");
+        System.out.println("modificando pila: ");
+        imprimirPila();
+
+        if (pila.peek().equals(array.get(array.size()-1))){
+            popDatos();
+            puntoyComa();
+        }
+    }
+
+    public void puntoyComa(){
+        String sub = array.get(array.size()-1);
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
+
+        if (pila.peek().equals(sub.substring(0,1))){
+            popDatos();
+            if (status) {
+                brk();
+            }
+        }
+    }
+
+    public void brk(){
+        System.out.println("evaluar: "+ array.get(array.size()-1));
+        imprimirPila();
+        pila.pop();
+        pila.push("break");
+        System.out.println("modificando pila: ");
+        imprimirPila();
+
+        System.out.println("Pila "+pila.peek() + " array "+array.get(array.size()-1));
+        if (pila.peek().equals(array.get(array.size()-1))){
+            popDatos();
+            status = false;
+            puntoyComa();
+            imprimirPila();
+            if (array.get(array.size()-1).equals("case")){
+                pila.push("C");
+                c();
+                brk();
+            }
         }
     }
 
     public void lc(){
+        System.out.println("evaluar: "+ array.get(array.size()-1));
         pila.pop();
         pila.push("}");
+        System.out.println("modificando pila: ");
+        imprimirPila();
+
+        if (pila.peek().equals(array.get(array.size()-1))){
+            popDatos();
+            imprimirPila();
+            System.out.println("Array "+ array.size());
+            resultado = true;
+        }
     }
 
 }
