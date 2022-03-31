@@ -28,12 +28,11 @@ public class modelreten {
     }
 
     public void imprimirPila(){
-        System.out.println("elementos en pila");
+        //System.out.println("elementos en pila");
         System.out.println(Arrays.asList(pila));
     }
 
     public void popDatos(){
-        System.out.println("comparando y eliminando");
         System.out.println("****");
         pila.pop();
         array.remove(array.size()-1);
@@ -179,7 +178,6 @@ public class modelreten {
 
     public void com(){
         System.out.println("evaluar: "+ array.get(array.size()-1));
-        imprimirPila();
         pila.pop();
         pila.push("“");
         System.out.println("modificando pila:");

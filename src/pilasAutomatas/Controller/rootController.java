@@ -45,11 +45,11 @@ public class rootController {
             boolean dt = envia.recibendoDato(entrad);
             if (dt){
                 System.out.println("Cadena Aceptada");
-                status.setText("codigo correcto");
+                status.setText("Codigo Correcto");
                 paneTrue.setVisible(true);
             }else {
                 System.out.println("Cadena No Aceptada");
-                status.setText("codigo con errores");
+                status.setText("Codigo con Errores");
                 paneFalse.setVisible(true);
             }
         }else {

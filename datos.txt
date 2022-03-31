@@ -9,3 +9,19 @@ switch ( variable ) {
  case “ valor ” : System.out.println(“Hola”) ; break ;
  case “ numero ” : System.out.println(“Hola”) ; break ;
  }
+
+ switch ( variable ) {
+  case 1 : System.out.println(“Hola”) ; break ;
+  }
+
+switch ( variable ) {
+ case “ dato ” : System.out.println(“Hola”) ; break ;
+ }
+
+  switch ( 1 ) {
+   case 1 : System.out.println(“Hola”) ; break ;
+   }
+
+   switch ( variable ) {
+      case 1 : System.out.println(“Hola”) ; berak ;
+      }
