@@ -1,0 +1,11 @@
+switch ( variable ) {
+ case 1 : System.out.println(“Hola”) ; break ;
+ case 2 : System.out.println(“Hola”) ; break ;
+ case 2 : System.out.println(“Hola”) ; break ;
+ }
+
+switch ( variable ) {
+ case “ dato ” : System.out.println(“Hola”) ; break ;
+ case “ valor ” : System.out.println(“Hola”) ; break ;
+ case “ numero ” : System.out.println(“Hola”) ; break ;
+ }

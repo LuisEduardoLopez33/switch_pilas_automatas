@@ -211,8 +211,6 @@ public class modelreten {
     public void dosPuntos(){
         System.out.println("evaluar: "+ array.get(array.size()-1));
         imprimirPila();
-        //pila.pop();
-        //pila.push(":");
         System.out.println("modificando pila: ");
         imprimirPila();
 
