@@ -239,6 +239,8 @@ public class modelreten {
             if (status) {
                 brk();
             }
+        }else {
+            System.out.println("Hace Falta ---> ;");
         }
     }
 
@@ -259,6 +261,8 @@ public class modelreten {
                 c();
                 brk();
             }
+        }else {
+            System.out.println("Hace Falta o Escribir bien ---> breack");
         }
     }
 

@@ -10,18 +10,24 @@ switch ( variable ) {
  case “ numero ” : System.out.println(“Hola”) ; break ;
  }
 
- switch ( variable ) {
-  case 1 : System.out.println(“Hola”) ; break ;
-  }
+
+Aceptables
+
+switch ( variable ) {
+ case 1 : System.out.println(“Hola”) ; break ;
+ }
 
 switch ( variable ) {
  case “ dato ” : System.out.println(“Hola”) ; break ;
  }
 
-  switch ( 1 ) {
-   case 1 : System.out.println(“Hola”) ; break ;
-   }
 
-   switch ( variable ) {
-      case 1 : System.out.println(“Hola”) ; berak ;
-      }
+no Aceptables
+
+switch ( dato ) {
+ case 1 : System.out.println(“Hola”) ; break
+  }
+
+switch ( variable ) {
+ case 1 : System.out.println(“Hola”) ; berak ;
+ }
