@@ -211,9 +211,6 @@ public class modelreten {
     public void dosPuntos(){
         System.out.println("evaluar: "+ array.get(array.size()-1));
         imprimirPila();
-        System.out.println("modificando pila: ");
-        imprimirPila();
-
         if (pila.peek().equals(array.get(array.size()-1))){
             popDatos();
             print();
@@ -254,8 +251,6 @@ public class modelreten {
         pila.push("break");
         System.out.println("modificando pila: ");
         imprimirPila();
-
-        System.out.println("Pila "+pila.peek() + " array "+array.get(array.size()-1));
         if (pila.peek().equals(array.get(array.size()-1))){
             popDatos();
             status = false;
